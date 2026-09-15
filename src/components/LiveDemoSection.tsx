@@ -34,6 +34,7 @@ interface LiveDemoSectionProps {
   isRefreshing: boolean;
   isFullScreen: boolean;
   setIsFullScreen: (val: boolean) => void;
+  onOpenPromptLab?: (shipmentId?: string, promptIdx?: number) => void;
 }
 
 export const LiveDemoSection: React.FC<LiveDemoSectionProps> = ({
@@ -49,6 +50,7 @@ export const LiveDemoSection: React.FC<LiveDemoSectionProps> = ({
   isRefreshing,
   isFullScreen,
   setIsFullScreen,
+  onOpenPromptLab,
 }) => {
   const [activeView, setActiveView] = useState<'table' | 'map'>('table');
 
@@ -128,6 +130,19 @@ export const LiveDemoSection: React.FC<LiveDemoSectionProps> = ({
                 <Mic className="h-3.5 w-3.5 text-cyan-400 animate-pulse" />
                 <span>Ask Voice AI</span>
               </button>
+
+              {/* AI Studio Prompt Hub Button */}
+              {onOpenPromptLab && (
+                <button
+                  onClick={() => onOpenPromptLab()}
+                  className="flex items-center gap-1.5 rounded-lg border border-blue-500/40 bg-blue-950/40 px-3 py-1.5 text-xs font-semibold text-cyan-300 hover:bg-blue-900/60 transition-all"
+                  title="Open Google AI Studio Prompt Hub (8 Prompts)"
+                >
+                  <Sparkles className="h-3.5 w-3.5 text-cyan-400" />
+                  <span className="hidden md:inline">AI Studio Prompts</span>
+                  <span className="rounded bg-cyan-500/20 px-1 py-0.2 text-[9px] font-mono text-cyan-300">8</span>
+                </button>
+              )}
 
               {/* View Switcher: Table vs Corridor Map */}
               <div className="inline-flex rounded-lg border border-slate-700 bg-slate-800/90 p-0.5 text-xs">

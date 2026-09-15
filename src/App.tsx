@@ -19,6 +19,7 @@ import { MitigationModal } from './components/MitigationModal';
 import { VoiceCommandModal } from './components/VoiceCommandModal';
 import { VideoDemoModal } from './components/VideoDemoModal';
 import { GithubModal } from './components/GithubModal';
+import { PromptLabModal } from './components/PromptLabModal';
 import { 
   CheckCircle2, 
   AlertTriangle, 
@@ -39,8 +40,21 @@ export default function App() {
   const [isVoiceModalOpen, setIsVoiceModalOpen] = useState<boolean>(false);
   const [isVideoDemoOpen, setIsVideoDemoOpen] = useState<boolean>(false);
   const [isGithubModalOpen, setIsGithubModalOpen] = useState<boolean>(false);
+  const [isPromptLabOpen, setIsPromptLabOpen] = useState<boolean>(false);
+  const [promptLabInitialPrompt, setPromptLabInitialPrompt] = useState<number>(0);
+  const [promptLabInitialShipmentId, setPromptLabInitialShipmentId] = useState<string>('SHP-9021');
   const [isFullScreenConsole, setIsFullScreenConsole] = useState<boolean>(false);
   const [isRefreshing, setIsRefreshing] = useState<boolean>(false);
+
+  const handleOpenPromptLab = (shipmentId?: string, promptIdx?: number) => {
+    if (shipmentId) {
+      setPromptLabInitialShipmentId(shipmentId);
+    }
+    if (typeof promptIdx === 'number') {
+      setPromptLabInitialPrompt(promptIdx);
+    }
+    setIsPromptLabOpen(true);
+  };
 
   // Toast Notification
   const [notification, setNotification] = useState<{
@@ -194,6 +208,7 @@ export default function App() {
         onOpenVoiceModal={() => setIsVoiceModalOpen(true)}
         onOpenVideoDemo={() => setIsVideoDemoOpen(true)}
         onOpenGithubModal={() => setIsGithubModalOpen(true)}
+        onOpenPromptLab={() => handleOpenPromptLab()}
         onScrollToSection={scrollToSection}
         isConsoleMode={isFullScreenConsole}
         setIsConsoleMode={setIsFullScreenConsole}
@@ -236,6 +251,7 @@ export default function App() {
             onOpenVideoDemo={() => setIsVideoDemoOpen(true)}
             onOpenVoiceModal={() => setIsVoiceModalOpen(true)}
             onQuickInspectTSMC={handleQuickInspectTSMC}
+            onOpenPromptLab={() => handleOpenPromptLab()}
           />
 
           {/* 2. PROBLEM SECTION */}
@@ -261,6 +277,7 @@ export default function App() {
             isRefreshing={isRefreshing}
             isFullScreen={isFullScreenConsole}
             setIsFullScreen={setIsFullScreenConsole}
+            onOpenPromptLab={handleOpenPromptLab}
           />
 
           {/* 5. HOW IT WORKS (4 STEPS) */}
@@ -298,6 +315,7 @@ export default function App() {
             isRefreshing={isRefreshing}
             isFullScreen={isFullScreenConsole}
             setIsFullScreen={setIsFullScreenConsole}
+            onOpenPromptLab={handleOpenPromptLab}
           />
         </div>
       )}
@@ -307,6 +325,7 @@ export default function App() {
         shipment={selectedShipment}
         onClose={() => setSelectedShipment(null)}
         onApplyMitigation={handleApplyMitigation}
+        onOpenPromptLab={handleOpenPromptLab}
       />
 
       {/* VOICE COMMAND ASSISTANT SIMULATOR MODAL */}
@@ -330,6 +349,15 @@ export default function App() {
       <GithubModal
         isOpen={isGithubModalOpen}
         onClose={() => setIsGithubModalOpen(false)}
+      />
+
+      {/* GOOGLE AI STUDIO PROMPTS & COGNITIVE LAB MODAL (8 PROMPTS) */}
+      <PromptLabModal
+        isOpen={isPromptLabOpen}
+        onClose={() => setIsPromptLabOpen(false)}
+        shipments={shipments}
+        initialSelectedShipmentId={promptLabInitialShipmentId}
+        initialPromptIndex={promptLabInitialPrompt}
       />
 
     </div>

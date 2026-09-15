@@ -21,6 +21,7 @@ interface HeroSectionProps {
   onOpenVideoDemo: () => void;
   onOpenVoiceModal: () => void;
   onQuickInspectTSMC: () => void;
+  onOpenPromptLab?: () => void;
 }
 
 export const HeroSection: React.FC<HeroSectionProps> = ({
@@ -28,6 +29,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
   onOpenVideoDemo,
   onOpenVoiceModal,
   onQuickInspectTSMC,
+  onOpenPromptLab,
 }) => {
   return (
     <section id="hero" className="relative overflow-hidden pt-8 pb-16 lg:pt-14 lg:pb-24">
@@ -102,6 +104,17 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               <Mic className="h-4 w-4 text-cyan-400 animate-pulse" />
               <span>Ask Voice Assistant</span>
             </button>
+
+            {/* Google AI Studio Prompts Pill CTA */}
+            {onOpenPromptLab && (
+              <button
+                onClick={onOpenPromptLab}
+                className="group flex items-center gap-2 rounded-xl border border-blue-500/40 bg-gradient-to-r from-blue-950/60 to-indigo-950/60 px-5 py-3.5 text-sm font-medium text-cyan-300 hover:border-cyan-400 hover:bg-blue-900/40 transition-all shadow-md shadow-blue-500/10 hover:scale-[1.02]"
+              >
+                <Sparkles className="h-4 w-4 text-cyan-400 group-hover:rotate-12 transition-transform" />
+                <span>8x AI Studio Prompts</span>
+              </button>
+            )}
           </div>
 
           {/* Live System Signal Strip */}

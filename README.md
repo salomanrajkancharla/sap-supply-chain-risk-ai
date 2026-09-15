@@ -149,6 +149,37 @@ Serve the React dashboard via local development server or open `index.html` conn
 
 ---
 
+## 🤖 Google AI Studio Prompt Suite (8 Enterprise Prompts)
+
+The platform includes a dedicated **Google AI Studio Prompt Hub** with 8 battle-tested prompt engineering templates optimized for Gemini 3.8 and Google AI Studio (`aistudio.google.com`). Each prompt is auto-hydrated in real-time from active SAP purchase orders:
+
+1. **Prompt 1: Risk Analysis (Main Diagnostic):** Deep root-cause diagnostic, business impact modeling, and 3-tier actionable mitigation options with 24-hour execution checklists.
+2. **Prompt 2: Quick Executive Recommendation (30 Seconds):** Crisp single-sentence C-suite directives with action, budget, and implementation timeline.
+3. **Prompt 3: Forecasting & Predictive Horizons (7–30 Days):** Predictive risk horizons across 7, 14, and 30-day temporal windows with risk matrices.
+4. **Prompt 4: Vendor Performance & Tier Governance:** Evaluates defect rates, delivery reliability, and determines whether to keep, develop, or replace suppliers.
+5. **Prompt 5: Multi-Supplier Crisis Response Planning:** Military-grade command-and-control mobilization across multi-vendor natural disaster disruptions.
+6. **Prompt 6: Global Compliance & ESG Risk Verification:** Regulatory verification covering EU CBAM, German Supply Chain Act (LkSG), US UFLPA, and Incoterms 2020.
+7. **Prompt 7: Multi-Option Cost-Benefit & ROI Scorecard:** Quantitative CFO-ready scorecard comparing NPV, ROI (+2,852%), payback horizons, and risk reduction.
+8. **Prompt 8: Multi-Audience Executive Communications:** Ready-to-dispatch templates for Suppliers, C-suite Escalation Briefs, and Proactive Customer Advisories.
+
+### Direct Python `@google/genai` Integration
+
+```python
+from google import genai
+import os
+
+client = genai.Client(api_key=os.environ.get("GEMINI_API_KEY"))
+
+response = client.models.generate_content(
+    model="gemini-3.8-flash",
+    contents="[Paste Hydrated Prompt from AI Studio Prompt Hub]",
+    config={"temperature": 0.2, "max_output_tokens": 2048}
+)
+print(response.text)
+```
+
+---
+
 ## 🛠️ Technology Stack
 
 | Layer | Technology | Function |

@@ -18,6 +18,7 @@ interface SiteNavbarProps {
   onOpenVoiceModal: () => void;
   onOpenVideoDemo: () => void;
   onOpenGithubModal: () => void;
+  onOpenPromptLab: () => void;
   onScrollToSection: (sectionId: string) => void;
   isConsoleMode: boolean;
   setIsConsoleMode: (val: boolean) => void;
@@ -27,6 +28,7 @@ export const SiteNavbar: React.FC<SiteNavbarProps> = ({
   onOpenVoiceModal,
   onOpenVideoDemo,
   onOpenGithubModal,
+  onOpenPromptLab,
   onScrollToSection,
   isConsoleMode,
   setIsConsoleMode,
@@ -92,6 +94,19 @@ export const SiteNavbar: React.FC<SiteNavbarProps> = ({
         {/* Right CTA Actions */}
         <div className="flex items-center gap-2 sm:gap-3">
           
+          {/* Google AI Studio Prompts Button */}
+          <button
+            onClick={onOpenPromptLab}
+            className="group relative flex items-center gap-1.5 rounded-xl border border-blue-500/40 bg-gradient-to-r from-blue-950/60 to-indigo-950/60 px-3 py-1.5 text-xs font-semibold text-cyan-300 shadow-sm transition-all hover:border-cyan-400 hover:bg-blue-900/40 hover:shadow-cyan-500/20 hover:scale-105"
+            title="Open Google AI Studio Prompt Hub (8 Prompts)"
+          >
+            <Sparkles className="h-3.5 w-3.5 text-cyan-400 group-hover:rotate-12 transition-transform" />
+            <span>AI Studio Prompts</span>
+            <span className="rounded-full bg-cyan-500/20 px-1.5 py-0.2 text-[9px] font-mono font-bold text-cyan-300 border border-cyan-500/30">
+              8
+            </span>
+          </button>
+
           {/* Voice Interface Trigger Button */}
           <button
             onClick={onOpenVoiceModal}
@@ -171,6 +186,21 @@ export const SiteNavbar: React.FC<SiteNavbarProps> = ({
             </button>
           ))}
           <div className="pt-2 flex flex-col gap-2 border-t border-slate-800">
+            <button
+              onClick={() => {
+                onOpenPromptLab();
+                setMobileMenuOpen(false);
+              }}
+              className="flex items-center justify-between rounded-lg bg-blue-950/60 border border-blue-500/40 px-3 py-2 text-xs font-semibold text-cyan-300"
+            >
+              <div className="flex items-center gap-2">
+                <Sparkles className="h-3.5 w-3.5 text-cyan-400" />
+                <span>Google AI Studio Prompts</span>
+              </div>
+              <span className="rounded-full bg-cyan-500/20 px-2 py-0.5 text-[10px] font-mono font-bold text-cyan-300">
+                8 Prompts
+              </span>
+            </button>
             <button
               onClick={() => {
                 onOpenVideoDemo();

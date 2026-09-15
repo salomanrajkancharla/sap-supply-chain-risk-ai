@@ -24,12 +24,14 @@ interface MitigationModalProps {
   shipment: Shipment | null;
   onClose: () => void;
   onApplyMitigation: (shipmentId: string, optionId: string, workflowId: string) => void;
+  onOpenPromptLab?: (shipmentId?: string, promptIdx?: number) => void;
 }
 
 export const MitigationModal: React.FC<MitigationModalProps> = ({
   shipment,
   onClose,
   onApplyMitigation,
+  onOpenPromptLab,
 }) => {
   if (!shipment) return null;
 
@@ -169,11 +171,28 @@ export const MitigationModal: React.FC<MitigationModalProps> = ({
 
           {/* Section 1: AI Root Cause Analysis */}
           <div className="rounded-xl border border-slate-800 bg-slate-900/60 p-4">
-            <div className="flex items-center gap-2 mb-2.5">
-              <Sparkles className="h-4 w-4 text-blue-400" />
-              <h3 className="text-xs font-bold uppercase tracking-wider text-slate-200">
-                1. AI Root Cause Analysis (Multi-Modal Telemetry)
-              </h3>
+            <div className="flex flex-wrap items-center justify-between gap-2 mb-2.5">
+              <div className="flex items-center gap-2">
+                <Sparkles className="h-4 w-4 text-blue-400" />
+                <h3 className="text-xs font-bold uppercase tracking-wider text-slate-200">
+                  1. AI Root Cause Analysis (Multi-Modal Telemetry)
+                </h3>
+              </div>
+
+              {onOpenPromptLab && (
+                <button
+                  onClick={() => {
+                    onClose();
+                    onOpenPromptLab(shipment.id, 0);
+                  }}
+                  className="flex items-center gap-1.5 rounded-lg border border-cyan-500/40 bg-cyan-950/40 hover:bg-cyan-900/50 px-2.5 py-1 text-[11px] font-semibold text-cyan-300 transition-all"
+                  title="Test all 8 prompts for this consignment in Google AI Studio Prompt Hub"
+                >
+                  <Sparkles className="h-3 w-3 text-cyan-400" />
+                  <span>Google AI Studio Prompts</span>
+                  <ArrowRight className="h-3 w-3" />
+                </button>
+              )}
             </div>
 
             <p className="text-xs leading-relaxed text-slate-300 bg-slate-950/60 p-3 rounded-lg border border-slate-800/80">

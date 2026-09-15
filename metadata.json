@@ -1,0 +1,6 @@
+{
+  "name": "SAP Supply Chain Risk Engine",
+  "description": "AI-powered Supply Chain Risk Prediction & Mitigation Platform for SAP systems with real-time ML disruption forecasts, voice input, and automated resolution workflows.",
+  "requestFramePermissions": ["microphone"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
